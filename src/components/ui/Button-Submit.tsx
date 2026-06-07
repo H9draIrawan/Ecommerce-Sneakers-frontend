@@ -13,9 +13,10 @@ function ButtonSubmit(props: Props) {
 			sx={{
 				backgroundColor: "#2196f3",
 				color: "#fff",
-				width: "15vh",
+				width: "auto",
 				fontSize: "2vh",
 				fontWeight: "bold",
+				px: 4,
 			}}
 		>
 			{props.name}

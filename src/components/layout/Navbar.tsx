@@ -1,13 +1,14 @@
 import CategoryIcon from "@mui/icons-material/Category";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 import HomeIcon from "@mui/icons-material/Home";
-import InfoIcon from "@mui/icons-material/Info";
 import LoginIcon from "@mui/icons-material/Login";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
 	AppBar,
 	Box,
+	Button,
 	Container,
+	Divider,
 	Drawer,
 	IconButton,
 	List,
@@ -19,28 +20,50 @@ import {
 	Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 function Navbar() {
 	const navItems = [
 		{
 			text: "Home",
-			icon: <HomeIcon sx={{ fontSize: "3vh" }} />,
-			href: "/#home",
-		},
-		{
-			text: "About",
-			icon: <InfoIcon sx={{ fontSize: "3vh" }} />,
-			href: "/#about",
-		},
-		{
-			text: "Contact",
-			icon: <ContactPageIcon sx={{ fontSize: "3vh" }} />,
-			href: "/#contact",
+			icon: (
+				<HomeIcon
+					sx={{
+						fontSize: {
+							xs: "4vh",
+							md: "2.5vw",
+						},
+					}}
+				/>
+			),
+			href: "#home",
 		},
 		{
 			text: "Product",
-			icon: <CategoryIcon sx={{ fontSize: "3vh" }} />,
-			href: "/#product",
+			icon: (
+				<CategoryIcon
+					sx={{
+						fontSize: {
+							xs: "4vh",
+							md: "2.5vw",
+						},
+					}}
+				/>
+			),
+			href: "#product",
+		},
+		{
+			text: "Contact",
+			icon: (
+				<ContactPageIcon
+					sx={{
+						fontSize: {
+							xs: "4vh",
+							md: "2.5vw",
+						},
+					}}
+				/>
+			),
+			href: "#contact",
 		},
 	];
 	const [open, setOpen] = useState(false);
@@ -50,14 +73,16 @@ function Navbar() {
 	};
 
 	const DrawerList = (
-		<Box onClick={toggleDrawer} sx={{ textAlign: "center", width: 250 }}>
+		<Box onClick={toggleDrawer} sx={{ textAlign: "center", width: 200 }}>
 			<List>
-				<img
+				<Box
+					component="img"
 					src="/src/assets/sneakers.png"
 					alt="sneakers-logo"
-					width={"64vh"}
 					className="m-auto"
+					style={{ width: "20vw" }}
 				/>
+				<Divider />
 
 				{navItems.map((item) => (
 					<ListItem key={item.text} disablePadding>
@@ -67,8 +92,6 @@ function Navbar() {
 								width: "100%",
 								textAlign: "left",
 								justifyContent: "flex-start",
-								px: 3,
-								py: 1.5,
 							}}
 						>
 							<ListItemIcon sx={{ minWidth: 40 }}>{item.icon}</ListItemIcon>
@@ -82,7 +105,7 @@ function Navbar() {
 	return (
 		<Box sx={{ flexGrow: 1 }} component="nav">
 			<AppBar
-				position="static"
+				position="fixed"
 				elevation={2}
 				sx={{ backgroundColor: "#1976d2" }}
 			>
@@ -90,7 +113,11 @@ function Navbar() {
 					<Toolbar disableGutters>
 						{/* TAMPILAN MOBILE: Menu */}
 						<Box
-							sx={{ flexGrow: 4, gap: 2, display: { xs: "flex", md: "none" } }}
+							sx={{
+								flexGrow: 4,
+								gap: 2,
+								display: { xs: "flex", sm: "flex", md: "none" },
+							}}
 						>
 							<IconButton
 								onClick={toggleDrawer}
@@ -100,29 +127,37 @@ function Navbar() {
 								aria-haspopup="true"
 								color="inherit"
 							>
-								<MenuIcon />
+								<MenuIcon
+									sx={{
+										fontSize: "5vh",
+									}}
+								/>
 							</IconButton>
-							<img
+							<Box
+								component="img"
 								src="/src/assets/sneakers.png"
 								alt="sneakers-logo"
 								width={"20%"}
 							/>
 						</Box>
 						{/* TAMPILAN DESKTOP: Logo */}
-						<Link
+						<NavLink
 							to="/app/"
 							color="inherit"
 							className="flex flex-row flex-1 gap-4 hidden md:flex"
 						>
-							<img
+							<Box
+								component="img"
 								src="/src/assets/sneakers.png"
 								alt="sneakers-logo"
-								width={"98vh"}
+								style={{
+									width: "5vw",
+								}}
 							/>
 							<Typography
 								variant="h6"
 								sx={{
-									fontSize: "3vh",
+									fontSize: "3vw",
 									fontWeight: "bold",
 									letterSpacing: 2,
 									alignSelf: "center",
@@ -130,7 +165,7 @@ function Navbar() {
 							>
 								Primera
 							</Typography>
-						</Link>
+						</NavLink>
 
 						{/* TAMPILAN DESKTOP: Navigation */}
 						<Box
@@ -138,24 +173,40 @@ function Navbar() {
 								flexGrow: 4,
 								display: { xs: "none", md: "flex" },
 								gap: 4,
-								fontSize: "2.5vh",
+								fontSize: "2vw",
 								fontWeight: "bold",
 								justifyContent: "center",
+								py: 2,
 							}}
 						>
 							{navItems.map((item) => (
-								<Link
-									to={"/app" + item.href}
+								<Button
+									href={"/app" + item.href}
 									key={item.text}
-									className="flex flex-row gap-2 items-center hover:bg-white hover:text-blue-500 rounded-xl p-2 my-2"
+									sx={{
+										color: "#fff",
+										textTransform: "none",
+										fontSize: "2vw",
+										letterSpacing: 1.5,
+										fontWeight: "bold",
+										gap: 1,
+										justifyContent: "center",
+										alignSelf: "center",
+										":hover": {
+											color: "#1976d2",
+											backgroundColor: "#fff",
+											borderRadius: 4,
+											boxShadow: "0 4px 14px 0 rgba(25, 118, 210, 0.4)",
+										},
+									}}
 								>
 									{item.icon}
 									{item.text}
-								</Link>
+								</Button>
 							))}
 						</Box>
 						{/* TAMPILAN DESKTOP: Login */}
-						<Link
+						<NavLink
 							to="/login"
 							color="inherit"
 							className="flex-1 hover:bg-white hover:text-blue-500 rounded-xl py-2 my-2"
@@ -167,25 +218,24 @@ function Navbar() {
 								sx={{
 									display: { xs: "none", md: "flex" },
 									fontWeight: "bold",
-									letterSpacing: 2,
-									fontSize: "2.5vh",
+									fontSize: "2vw",
 									justifyContent: "center",
 									alignSelf: "center",
 									gap: 1,
 								}}
 							>
 								Login
-								<LoginIcon sx={{ fontSize: "4vh" }} />
+								<LoginIcon sx={{ fontSize: "3vw", alignSelf: "center" }} />
 							</Typography>
-						</Link>
+						</NavLink>
 						{/* TAMPILAN MOBILE: Login */}
-						<Link
+						<NavLink
 							to="/login"
 							color="inherit"
 							className="flex-1 flex md:hidden py-2 my-2"
 						>
 							<LoginIcon sx={{ fontSize: "4vh", justifySelf: "flex-end" }} />
-						</Link>
+						</NavLink>
 					</Toolbar>
 				</Container>
 			</AppBar>
