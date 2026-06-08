@@ -1,16 +1,11 @@
 "use client";
 
-import {
-	Checkbox,
-	FormControlLabel,
-	Grid,
-	TextField,
-	Typography,
-} from "@mui/material";
-import { Form } from "react-router-dom";
+import { Grid, TextField, Typography } from "@mui/material";
+import { Form, useActionData } from "react-router-dom";
 import ButtonSubmit from "../ui/Button-Submit";
 
 function RegisterForm() {
+	const actionData = useActionData();
 	return (
 		<Form method="POST" noValidate className="flex flex-col gap-4 md:w-4/5">
 			<Grid container spacing={2}>
@@ -34,8 +29,9 @@ function RegisterForm() {
 						type="password"
 					/>
 				</Grid>
-				<Grid size={12}>
+				{/* <Grid size={12}>
 					<FormControlLabel
+						name="agreeTerms"
 						control={<Checkbox name="agreeTerms" color="primary" />}
 						label={
 							<Typography variant="body1">
@@ -43,10 +39,17 @@ function RegisterForm() {
 							</Typography>
 						}
 					/>
-				</Grid>
+				</Grid> */}
 				<Grid size={12}>
 					<ButtonSubmit name="Register" />
 				</Grid>
+				{actionData?.error && (
+					<Grid size={12}>
+						<Typography variant="body1" color="error">
+							{actionData.error}
+						</Typography>
+					</Grid>
+				)}
 			</Grid>
 		</Form>
 	);

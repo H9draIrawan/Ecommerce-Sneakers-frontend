@@ -9,6 +9,7 @@ import GlobalError from "./components/error/Global-Error";
 import App from "./pages/App";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { actionRegister } from "./services/actions";
 
 const router = createBrowserRouter([
 	{
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
 	{
 		element: <Register />,
 		path: "/register",
+		action: actionRegister,
 	},
 	{
 		element: <Login />,
