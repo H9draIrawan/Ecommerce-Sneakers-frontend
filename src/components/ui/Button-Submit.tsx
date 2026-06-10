@@ -3,11 +3,7 @@
 import { Button } from "@mui/material";
 import { useFormStatus } from "react-dom";
 
-interface Props {
-	name: string;
-}
-
-function ButtonSubmit(props: Props) {
+function ButtonSubmit(props: { name: string }) {
 	const { pending } = useFormStatus();
 	return (
 		<Button

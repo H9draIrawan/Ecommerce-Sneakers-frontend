@@ -1,11 +1,21 @@
 "use client";
 
-import { Grid, TextField, Typography } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import {
+	Grid,
+	IconButton,
+	InputAdornment,
+	TextField,
+	Typography,
+} from "@mui/material";
+import { useState } from "react";
 import { Form, useActionData } from "react-router-dom";
 import ButtonSubmit from "../ui/Button-Submit";
 
 function RegisterForm() {
 	const actionData = useActionData();
+	const [showPassword, setShowPassword] = useState(false);
 	return (
 		<Form method="POST" noValidate className="flex flex-col gap-4 md:w-4/5">
 			<Grid container spacing={2}>
@@ -26,20 +36,27 @@ function RegisterForm() {
 						fullWidth
 						label="Password"
 						name="password"
-						type="password"
+						type={showPassword ? "text" : "password"}
+						slotProps={{
+							input: {
+								endAdornment: (
+									<InputAdornment position="end">
+										<IconButton
+											onClick={() => setShowPassword(!showPassword)}
+											edge="end"
+										>
+											{showPassword ? (
+												<VisibilityIcon />
+											) : (
+												<VisibilityOffIcon />
+											)}
+										</IconButton>
+									</InputAdornment>
+								),
+							},
+						}}
 					/>
 				</Grid>
-				{/* <Grid size={12}>
-					<FormControlLabel
-						name="agreeTerms"
-						control={<Checkbox name="agreeTerms" color="primary" />}
-						label={
-							<Typography variant="body1">
-								I agree to the terms and conditions
-							</Typography>
-						}
-					/>
-				</Grid> */}
 				<Grid size={12}>
 					<ButtonSubmit name="Register" />
 				</Grid>

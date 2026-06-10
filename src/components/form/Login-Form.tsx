@@ -5,15 +5,18 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import {
 	Checkbox,
 	FormControlLabel,
+	Grid,
 	IconButton,
 	InputAdornment,
 	TextField,
+	Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, useActionData } from "react-router-dom";
 import ButtonSubmit from "../ui/Button-Submit";
 
 function LoginForm() {
+	const actionData = useActionData();
 	const [showPassword, setShowPassword] = useState(false);
 	return (
 		<Form method="POST" noValidate className="flex flex-col gap-4 md:w-4/5">
@@ -44,6 +47,13 @@ function LoginForm() {
 				sx={{ my: 1 }}
 			/>
 			<ButtonSubmit name="Login" />
+			{actionData?.error && (
+				<Grid size={12}>
+					<Typography variant="body1" color="error">
+						{actionData.error}
+					</Typography>
+				</Grid>
+			)}
 		</Form>
 	);
 }
