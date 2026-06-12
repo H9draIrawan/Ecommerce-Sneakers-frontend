@@ -57,17 +57,15 @@ function RegisterForm() {
 						}}
 					/>
 				</Grid>
-				<Grid size={12}>
-					<ButtonSubmit name="Register" />
-				</Grid>
-				{actionData?.error && (
-					<Grid size={12}>
-						<Typography variant="body1" color="error">
-							{actionData.error}
-						</Typography>
-					</Grid>
-				)}
 			</Grid>
+			<ButtonSubmit name="Register" />
+			{actionData?.error && (
+				<Grid size={12}>
+					<Typography variant="body1" color="error">
+						{actionData.error}
+					</Typography>
+				</Grid>
+			)}
 		</Form>
 	);
 }

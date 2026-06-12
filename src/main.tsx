@@ -6,11 +6,15 @@ import {
 	RouterProvider,
 } from "react-router-dom";
 import GlobalError from "./components/error/Global-Error";
+import Activation from "./pages/Activation";
 import App from "./pages/App";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { actionLogin, actionRegister } from "./services/actions";
-import Activation from "./pages/Activation";
+import {
+	actionActivation,
+	actionLogin,
+	actionRegister,
+} from "./services/actions";
 
 const router = createBrowserRouter([
 	{
@@ -32,14 +36,15 @@ const router = createBrowserRouter([
 	{
 		element: <Login />,
 		path: "/login",
-		action : actionLogin,
+		action: actionLogin,
 		errorElement: <GlobalError />,
 	},
 	{
-		element : <Activation />,
+		element: <Activation />,
 		path: "/activation",
+		action: actionActivation,
 		errorElement: <GlobalError />,
-	}
+	},
 ]);
 
 createRoot(document.getElementById("root")!).render(

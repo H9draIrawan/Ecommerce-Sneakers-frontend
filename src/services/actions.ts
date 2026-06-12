@@ -70,6 +70,7 @@ async function actionLogin({ request }: ActionFunctionArgs) {
 
 async function actionActivation({ request }: ActionFunctionArgs) {
 	const formData = await request.formData();
+	console.log(formData);
 	const otp = formData.get("otp");
 
 	const response = await fetch(

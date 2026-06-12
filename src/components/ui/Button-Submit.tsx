@@ -11,10 +11,10 @@ function ButtonSubmit(props: { name: string }) {
 			sx={{
 				backgroundColor: "#2196f3",
 				color: "#fff",
-				width: "auto",
 				fontSize: "2vh",
 				fontWeight: "bold",
 				px: 4,
+				mt: 2,
 			}}
 			disabled={pending}
 		>
